@@ -7,7 +7,7 @@ Required dependencies:
   f) `npm install socket.io-client --save`  
   g) `npm install @material-ui/core`
   
-To start application:
-  a) `npm run watch`
-  ... open another terminal ...
+To start application: <br>
+  a) `npm run watch` <br>
+  ... open another terminal ... <br>
   b) `python app.py`
