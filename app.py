@@ -1,16 +1,48 @@
 import os
 import flask
 import flask_socketio
+import random
+import requests
+import emoji
+import re
+import sys
+
+from emoji import unicode_codes
 
 app = flask.Flask(__name__)
 server_socket = flask_socketio.SocketIO(app)
 server_socket.init_app(app, cors_allowed_origins="*")
 
 def bot(message):
-    if (message == "!! about"):
+    
+    if (message == "!!about"):
         server_socket.send("This is the best chat app in the world!")
-    if (message == "!! help"):
-        server_socket.send("Select from one of these: !! about -  !! funtranslations - !! quote -  !! pokemon")
+        
+    if (message == "!!pokemon"):
+        poke_num = random.randint(1, 151)
+        api_link = f"https://pokeapi.co/api/v2/pokemon/{poke_num}"
+        poke_data = requests.get(api_link)
+        pack_data = poke_data.json()
+        poke_name = pack_data['species']['name']
+        poke_type = pack_data['types'][0]['type']['name']
+        print(poke_name, poke_type)
+        server_socket.send(poke_name + " is a " + poke_type + " pokemon! :)")
+        
+    if (message == "!!mood"):
+        moods = [ "I'm feeling happy.",
+                "I'm feeling sleepy.",
+                "I'm feeling awkward.",
+                "I'm feeling lovely.",
+                "I'm feeling hungry.",
+                "I'm feeling evil.",
+                "I'm feeling evil.",
+                "I'm feeling bored.",
+                "I'm feeling lazy....."]
+        server_socket.send(random.choice(moods))
+        
+    if (message == "!!help"):
+        server_socket.send("Select from one of these: !!about -  !!funtranslations - !!mood -  !!pokemon - !!help")
+        
 
 @app.route('/')
 def hello():
