@@ -1,0 +1,10 @@
+p {
+  border-radius: 25px;
+  background: #ffe6f2;
+  padding: 3px;
+  width: 300px;
+  position: relative;
+  right: -285px;
+  overflow-y: hidden;
+  font-family: Garamond;
+}

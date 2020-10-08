@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import * as SocketIO from 'socket.io-client';
+import './Styles.css';
 
 export var client_socket = SocketIO.connect();
 
@@ -18,14 +19,13 @@ const useStyles = makeStyles(layout => ({
     },
     flex: {
         display: 'flex',
-        alignItems: 'center'
     },
     chat_window: {
         width: '100%',
         height: '300px',
         textAlign: 'right',
         padding: '3px',
-        overflowY: 'auto'
+        overflowY: 'auto',
     },
     chat_box: {
         width: '90%'  
@@ -35,6 +35,26 @@ const useStyles = makeStyles(layout => ({
         },
 
 }));
+
+/*
+const [messages, setMessage] = useState({ message: '', name: '' })
+const [chat, setChat] = useState([])
+useEffect(() => {
+    socket.on('message', ({ name, message }) => {
+      setChat([...chat, { name, message }])
+    })
+  })
+  socket.removeAllListeners()
+const handleChange = e => {
+    setMessage({ ...messages, [e.target.name]: e.target.value })
+  }
+  const onSubmit = e => {
+    e.preventDefault()
+    const { name, message } = messages
+    socket.emit('message', { name, message })
+    setMessage({ message: '', name })
+  }
+  */
 
 export default function Layout() {
     const [initial_message, set_initial_message] = useState([]);
@@ -63,7 +83,7 @@ export default function Layout() {
                 <Paper className={useStyles().root}>
                 <Paper elevation={3} />
                     <Typography variant="h5" component="h3"> Chat </Typography>
-                    <Typography component="p">Have some fun</Typography>
+                    <Typography component="h3">Have some fun</Typography>
 
                     <div className={useStyles().chat_window}>
                         { initial_message.map(msg => (<p>{msg}</p>)) }
