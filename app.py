@@ -6,6 +6,12 @@ app = flask.Flask(__name__)
 server_socket = flask_socketio.SocketIO(app)
 server_socket.init_app(app, cors_allowed_origins="*")
 
+def bot(message):
+    if (message == "!! about"):
+        server_socket.send("This is the best chat app in the world!")
+    if (message == "!! help"):
+        server_socket.send("Select from one of these: !! about -  !! funtranslations - !! quote -  !! pokemon")
+
 @app.route('/')
 def hello():
     return flask.render_template('index.html')
@@ -28,7 +34,8 @@ def on_disconnect():
 def message_handler(message):
     print("Received message: " + message)
     flask_socketio.send(message)
-
+    bot(message)
+    
 
 if __name__ == '__main__': 
     server_socket.run(
