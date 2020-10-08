@@ -46,11 +46,13 @@ def bot(message):
             
         elif (message.split()[0] == "!!funtranslate"):
             phrase= message[15:]
+            """
             api_link = f"https://api.funtranslations.com/translate/doge.json?text={phrase}"
             doge_data = requests.get(api_link)
             pack_data = doge_data.json()
             translated = pack_data['contents']['translated']
-            server_socket.send(translated + " - Doge")
+            """
+            server_socket.send("PLACEHOLDER VALUE - DOGE")
         
         else:
             server_socket.send("Sorry, that's not a proper command. :/")
@@ -77,7 +79,7 @@ def on_disconnect():
 @server_socket.on('message')
 def message_handler(message):
     print("Received message: " + message)
-    flask_socketio.send(message)
+    server_socket.send(message)
     bot(message)
     
 
