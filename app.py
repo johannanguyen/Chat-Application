@@ -5,6 +5,10 @@ import random
 import requests
 import emoji
 
+import random
+import requests
+import emoji
+
 
 app = flask.Flask(__name__)
 server_socket = flask_socketio.SocketIO(app)
@@ -47,6 +51,47 @@ def bot(message):
         translated = pack_data['contents']['translated']
         server_socket.send(translated + " - Doge")
         
+        
+
+def bot(message):
+    if(message[0:2] == "!!"):
+        if (message == "!!about"):
+            server_socket.send("This is the best chat app in the world!")
+            
+        elif (message == "!!pokemon"):
+            poke_num = random.randint(1, 151)
+            api_link = f"https://pokeapi.co/api/v2/pokemon/{poke_num}"
+            poke_data = requests.get(api_link)
+            pack_data = poke_data.json()
+            poke_name = pack_data['species']['name']
+            poke_type = pack_data['types'][0]['type']['name']
+            print(poke_name, poke_type)
+            server_socket.send(poke_name + " is a " + poke_type + " pokemon! :)")
+            
+        elif (message == "!!mood"):
+            moods = [ "I'm feeling happy.",
+                    "I'm feeling sleepy.",
+                    "I'm feeling awkward.",
+                    "I'm feeling lovely.",
+                    "I'm feeling hungry.",
+                    "I'm feeling evil.",
+                    "I'm feeling bored.",
+                    "I'm feeling lazy....."]
+            server_socket.send(random.choice(moods))
+            
+        elif (message == "!!help"):
+            server_socket.send("Select from one of these: !!about -  !!funtranslate [message] - !!mood -  !!pokemon - !!help")
+            
+        elif (message.split()[0] == "!!funtranslate"):
+            phrase= message[15:]
+            api_link = f"https://api.funtranslations.com/translate/doge.json?text={phrase}"
+            doge_data = requests.get(api_link)
+            pack_data = doge_data.json()
+            translated = pack_data['contents']['translated']
+            server_socket.send(translated + " - Doge")
+        
+        else:
+            server_socket.send("Sorry, that's not a proper command. :/")
         
 
 @app.route('/')
