@@ -6,8 +6,10 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import * as SocketIO from 'socket.io-client';
+import GoogleLogin from 'react-google-login';
 
 export var client_socket = SocketIO.connect();
+
 
 //Position the different components
 const useStyles = makeStyles(layout => ({
@@ -37,6 +39,7 @@ const useStyles = makeStyles(layout => ({
 }));
 
 export default function Layout() {
+    
     const [initial_message, set_initial_message] = useState([]);
     const [new_message, set_message] = useState("");
 
@@ -57,6 +60,7 @@ export default function Layout() {
         set_message("");
     };
 
+    
     return (
         <div>
             <div align = "center">
