@@ -7,7 +7,6 @@ import emoji
 import re
 import sys
 
-from emoji import unicode_codes
 
 app = flask.Flask(__name__)
 server_socket = flask_socketio.SocketIO(app)
@@ -35,13 +34,21 @@ def bot(message):
                 "I'm feeling lovely.",
                 "I'm feeling hungry.",
                 "I'm feeling evil.",
-                "I'm feeling evil.",
                 "I'm feeling bored.",
                 "I'm feeling lazy....."]
         server_socket.send(random.choice(moods))
         
     if (message == "!!help"):
-        server_socket.send("Select from one of these: !!about -  !!funtranslations - !!mood -  !!pokemon - !!help")
+        server_socket.send("Select from one of these: !!about -  !!funtranslate [message] - !!mood -  !!pokemon - !!help")
+        
+    if (message[0:14] == "!!funtranslate"):
+        phrase= message[15:]
+        api_link = f"https://api.funtranslations.com/translate/doge.json?text={phrase}"
+        doge_data = requests.get(api_link)
+        pack_data = doge_data.json()
+        translated = pack_data['contents']['translated']
+        server_socket.send(translated + " - Doge")
+        
         
 
 @app.route('/')
