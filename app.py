@@ -4,8 +4,6 @@ import flask_socketio
 import random
 import requests
 import emoji
-import re
-import sys
 
 
 app = flask.Flask(__name__)
