@@ -37,25 +37,6 @@ const useStyles = makeStyles(layout => ({
 
 }));
 
-/*
-const [messages, setMessage] = useState({ message: '', name: '' })
-const [chat, setChat] = useState([])
-useEffect(() => {
-    socket.on('message', ({ name, message }) => {
-      setChat([...chat, { name, message }])
-    })
-  })
-  socket.removeAllListeners()
-const handleChange = e => {
-    setMessage({ ...messages, [e.target.name]: e.target.value })
-  }
-  const onSubmit = e => {
-    e.preventDefault()
-    const { name, message } = messages
-    socket.emit('message', { name, message })
-    setMessage({ message: '', name })
-  }
-  */
 
 export default function Layout() {
     
