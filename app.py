@@ -72,15 +72,17 @@ def on_connect():
     server_socket.emit('new_user', {
         'num_users': num_users
     })
-    print("num users:", num_users)
+
     
 
 @server_socket.on('disconnect')
 def on_disconnect():
     global num_users
     num_users -= 1
-    print ('Someone disconnected!')
-    print("num users:", num_users)
+    print('Someone disconnected!')
+    server_socket.emit('lost_user', {
+        'num_users': num_users
+    })
 
 
 @server_socket.on('message')
