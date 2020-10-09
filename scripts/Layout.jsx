@@ -73,7 +73,8 @@ export default function Layout() {
                 <Paper className={useStyles().root}>
                 <Paper elevation={3} />
                     <Typography variant="h5" component="h3"> Chat </Typography>
-                    <Typography component="h3">Have some fun</Typography>
+                    <Typography component="h3">Number of users: {num_users}</Typography>
+        
 
 
                     <div className={useStyles().chat_window}>
