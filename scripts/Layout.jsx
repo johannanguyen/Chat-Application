@@ -39,13 +39,19 @@ const useStyles = makeStyles(layout => ({
 
 
 export default function Layout() {
-    
+    const [num_users, set_user_count] = useState(0);
     const [initial_message, set_initial_message] = useState([]);
     const [new_message, set_message] = useState("");
 
     useEffect(() => {
     client_socket.on('message', msg => {
       set_initial_message([...initial_message, msg]);
+        });
+    });
+    
+    useEffect(() => {
+    client_socket.on("new_user", (data) => {
+      set_user_count(data['num_users']);
         });
     });
     
