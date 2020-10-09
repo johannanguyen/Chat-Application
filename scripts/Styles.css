@@ -1,4 +1,4 @@
-p {
+.p_self {
   border-radius: 25px;
   background: #ffe6f2;
   padding: 3px;
@@ -7,4 +7,17 @@ p {
   right: -285px;
   overflow-y: hidden;
   font-family: Garamond;
+  border: 1px solid white;
+}
+
+.p_others {
+  border-radius: 25px;
+  background: #e7accf;
+  padding: 3px;
+  width: 300px;
+  position: relative;
+  right: 0px;
+  overflow-y: hidden;
+  font-family: Garamond;
+  border: 1px solid white;
 }
