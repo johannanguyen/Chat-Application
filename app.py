@@ -13,6 +13,7 @@ import emoji
 app = flask.Flask(__name__)
 server_socket = flask_socketio.SocketIO(app)
 server_socket.init_app(app, cors_allowed_origins="*")
+num_users = 0
 
 
 def bot(message):
@@ -65,15 +66,21 @@ def hello():
 
 @server_socket.on('connect')
 def on_connect():
+    global num_users
+    num_users += 1
     print('Someone connected!')
-    server_socket.emit('connected', {
-        'test': 'Connected'
+    server_socket.emit('new_user', {
+        'num_users': num_users
     })
+    print("num users:", num_users)
     
 
 @server_socket.on('disconnect')
 def on_disconnect():
+    global num_users
+    num_users -= 1
     print ('Someone disconnected!')
+    print("num users:", num_users)
 
 
 @server_socket.on('message')

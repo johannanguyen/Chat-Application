@@ -69,8 +69,9 @@ export default function Layout() {
                     <Typography variant="h5" component="h3"> Chat </Typography>
                     <Typography component="h3">Have some fun</Typography>
 
+
                     <div className={useStyles().chat_window}>
-                        { initial_message.map(msg => (<p>{msg}</p>)) }
+                        { initial_message.map(msg => (<div className="p_self">{msg}</div>)) }
                     </div>
 
                     <div className={useStyles().flex}>
