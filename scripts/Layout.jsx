@@ -58,7 +58,6 @@ export default function Layout() {
     useEffect(() => {
     client_socket.on('message', msg => {
       set_initial_message([...initial_message, msg]);
-      console.log("in message");
         });
     });
     
@@ -97,13 +96,13 @@ export default function Layout() {
                 
 
                     <Typography variant="h5" component="h3"> Chat </Typography>
-                    <Typography component="h3">Number of users: {num_users} Your username: {new_username}</Typography>
+                    <Typography component="h3">Number of users: {num_users}</Typography>
         
 
                     <div className={useStyles().chat_window}>
                     <ScrollToBottom className="useStyles().chat_window">
-                    
                         { initial_message.map(msg => (<div className="p_self">{msg}</div>)) }
+
                     </ScrollToBottom>
                     </div>
                     
