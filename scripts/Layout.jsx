@@ -25,7 +25,7 @@ const useStyles = makeStyles(layout => ({
     chat_window: {
         width: '100%',
         height: '300px',
-        textAlign: 'right',
+        textAlign: 'center',
         padding: '3px',
         overflowY: 'auto',
         overflowX: 'hidden',
