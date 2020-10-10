@@ -68,15 +68,19 @@ def hello():
 
 @server_socket.on('connect')
 def on_connect():
+    user_list = ["eevee", "flareon", "vaporeon", "jolteon", "umbreon", "espeon", "glaceon", "leafeon", "sylveon"]
+    global new_username 
+    new_username = random.choice(user_list)
+    
+    server_socket.emit('username', { 'new_username': new_username}, request.sid)
+    print(new_username)
     
     global num_users
     num_users += 1
 
-    print('Someone connected!', num_users)
-    server_socket.emit('new_user', {
-        'num_users': num_users
-    })
-    
+    print('Someone connected!')
+    server_socket.emit('new_user', { 'num_users': num_users })
+
 
     
 
@@ -85,18 +89,19 @@ def on_disconnect():
     global num_users
     num_users -= 1
     print('Someone disconnected!')
-    server_socket.emit('lost_user', {
-        'num_users': num_users
-    })
+    server_socket.emit('lost_user', { 'num_users': num_users })
 
 
 @server_socket.on('message')
 def message_handler(message):
     global new_username
-    print("Received message: " + message)
-    server_socket.send(message)
-    bot(message)
-
+    #server_socket.send(message)
+    #bot(message)
+    server_socket.emit('message', {
+        'message': message,
+        'new_username': new_username
+    })
+    print("Received message: ", message["new_username"], message["new_message"])
     
 
 if __name__ == '__main__': 
@@ -106,3 +111,21 @@ if __name__ == '__main__':
         port=int(os.getenv('PORT', 8080)),
         debug=True
     )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
