@@ -68,20 +68,15 @@ def hello():
 
 @server_socket.on('connect')
 def on_connect():
-    user_list = ["eevee", "flareon", "vaporeon", "jolteon", "umbreon", "espeon", "iceon", "leafeon", "sylveon"]
-    global new_username 
-    new_username = random.choice(user_list)
     
     global num_users
     num_users += 1
 
-    server_socket.emit('username', { 'new_username': new_username}, request.sid)
-    print(new_username)
-
-    print('Someone connected!')
+    print('Someone connected!', num_users)
     server_socket.emit('new_user', {
         'num_users': num_users
     })
+    
 
     
 
