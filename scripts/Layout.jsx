@@ -72,19 +72,23 @@ export default function Layout() {
     return (
         <div>
             <div align = "center">
+            
+                //Background
                 <Paper className={useStyles().root}>
                 <Paper elevation={3} />
+                
+                    //Headers
                     <Typography variant="h5" component="h3"> Chat </Typography>
                     <Typography component="h3">Number of users: {num_users}</Typography>
         
-
-                    
+                    //Where chat appears
                     <div className={useStyles().chat_window}>
                     <ScrollToBottom className="useStyles().chat_window">
                         { initial_message.map(msg => (<div className="p_self">{msg}</div>)) }
                         </ScrollToBottom>
                     </div>
                     
+                    //Where text field and button appear
                     <div className={useStyles().flex}>
                         <TextField
                           id="standard-multiline-flexible"
@@ -94,11 +98,15 @@ export default function Layout() {
                           className={useStyles().chat_box}
                           onChange={ change_handler } 
                           value={ new_message }
-                        />
-                      <Button variant="contained" color="secondary" onClick={ click_handler }>Send</Button>  
+                         />
+                         
+                        <Button variant="contained" color="secondary" onClick={ click_handler }>Send</Button>  
                     </div>
+                    
                 </Paper>
+                
             </div>
+            
         </div>
     );
 }
