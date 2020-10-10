@@ -50,7 +50,8 @@ export default function Layout() {
     useEffect(() => {
     client_socket.on("username", (data) => {
       set_username(data['new_username']);
-      console.log("Received user name: " + data['new_username']);
+      set_user_count(data['num_users']);
+      console.log("Received user name: " + data['new_username'], data['num_users']);
         });
     });
     
