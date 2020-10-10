@@ -79,13 +79,13 @@ def on_connect():
     global num_users
     num_users += 1
     
-    server_socket.emit('username', { 'new_username': new_username}, request.sid)
+    server_socket.emit('username', { 'new_username': new_username, 'num_users': num_users }, request.sid)
     print("Given username: ", new_username)
     
+    server_socket.emit('new_user', { 'num_users': num_users }, broadcast=True)
     print('Someone connected!', num_users)
-    server_socket.emit('new_user', { 'num_users': num_users })
-
     
+
 
 @server_socket.on('disconnect')
 def on_disconnect():
