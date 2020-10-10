@@ -68,18 +68,23 @@ def hello():
 
 @server_socket.on('connect')
 def on_connect():
-    user_list = ["eevee", "flareon", "vaporeon", "jolteon", "umbreon", "espeon", "glaceon", "leafeon", "sylveon"]
-    global new_username 
-    new_username = random.choice(user_list)
+    poke_num = random.randint(1, 151)
+    api_link = f"https://pokeapi.co/api/v2/pokemon/{poke_num}"
+    poke_data = requests.get(api_link)
+    pack_data = poke_data.json()
     
-    server_socket.emit('username', { 'new_username': new_username}, request.sid)
-    print(new_username)
+    global new_username 
+    new_username = pack_data['species']['name']
     
     global num_users
     num_users += 1
 
-    print('Someone connected!')
+    server_socket.emit('username', { 'new_username': new_username}, request.sid)
+    print("Given username: ", new_username)
+    
+    print('Someone connected!', num_users)
     server_socket.emit('new_user', { 'num_users': num_users })
+
 
 
     
@@ -95,7 +100,10 @@ def on_disconnect():
 @server_socket.on('message')
 def message_handler(message):
     global new_username
+<<<<<<< HEAD
     #server_socket.send(message)
+=======
+>>>>>>> username
     #bot(message)
     server_socket.emit('message', {
         'message': message,
