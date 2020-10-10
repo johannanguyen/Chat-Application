@@ -42,25 +42,37 @@ const useStyles = makeStyles(layout => ({
 
 
 export default function Layout() {
+    const [new_username, set_username] = useState("");
     const [num_users, set_user_count] = useState(0);
     const [initial_message, set_initial_message] = useState([]);
     const [new_message, set_message] = useState("");
+    
+    useEffect(() => {
+    client_socket.on("username", (data) => {
+      set_username(data['new_username']);
+      console.log("Received user name: " + data['new_username']);
+        });
+    });
+    
 
     useEffect(() => {
     client_socket.on('message', msg => {
       set_initial_message([...initial_message, msg]);
+      console.log("in message");
         });
     });
     
     useEffect(() => {
     client_socket.on("new_user", (data) => {
       set_user_count(data['num_users']);
+      console.log("Received num users: " + data['num_users']);
         });
     });
     
     useEffect(() => {
     client_socket.on("lost_user", (data) => {
       set_user_count(data['num_users']);
+      console.log("Received num users: " + data['num_users']);
         });
     });
     
@@ -85,13 +97,14 @@ export default function Layout() {
                 
 
                     <Typography variant="h5" component="h3"> Chat </Typography>
-                    <Typography component="h3">Number of users: {num_users}</Typography>
+                    <Typography component="h3">Number of users: {num_users} Your username: {new_username}</Typography>
         
 
                     <div className={useStyles().chat_window}>
                     <ScrollToBottom className="useStyles().chat_window">
+                    
                         { initial_message.map(msg => (<div className="p_self">{msg}</div>)) }
-                        </ScrollToBottom>
+                    </ScrollToBottom>
                     </div>
                     
                     

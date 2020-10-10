@@ -1,5 +1,6 @@
 import os
-import flask
+import flask 
+from flask import request
 import flask_socketio
 import random
 import requests
@@ -14,6 +15,7 @@ app = flask.Flask(__name__)
 server_socket = flask_socketio.SocketIO(app)
 server_socket.init_app(app, cors_allowed_origins="*")
 num_users = 0
+new_username = ""
 
 
 def bot(message):
@@ -66,8 +68,16 @@ def hello():
 
 @server_socket.on('connect')
 def on_connect():
+    user_list = ["eevee", "flareon", "vaporeon", "jolteon", "umbreon", "espeon", "iceon", "leafeon", "sylveon"]
+    global new_username 
+    new_username = random.choice(user_list)
+    
     global num_users
     num_users += 1
+
+    server_socket.emit('username', { 'new_username': new_username}, request.sid)
+    print(new_username)
+
     print('Someone connected!')
     server_socket.emit('new_user', {
         'num_users': num_users
