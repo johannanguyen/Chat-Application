@@ -100,10 +100,6 @@ def on_disconnect():
 @server_socket.on('message')
 def message_handler(message):
     global new_username
-<<<<<<< HEAD
-    #server_socket.send(message)
-=======
->>>>>>> username
     #bot(message)
     server_socket.emit('message', {
         'message': message,
