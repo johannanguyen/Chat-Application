@@ -68,20 +68,19 @@ def hello():
 
 @server_socket.on('connect')
 def on_connect():
-    user_list = ["eevee", "flareon", "vaporeon", "jolteon", "umbreon", "espeon", "iceon", "leafeon", "sylveon"]
+    user_list = ["eevee", "flareon", "vaporeon", "jolteon", "umbreon", "espeon", "glaceon", "leafeon", "sylveon"]
     global new_username 
     new_username = random.choice(user_list)
+    
+    server_socket.emit('username', { 'new_username': new_username}, request.sid)
+    print(new_username)
     
     global num_users
     num_users += 1
 
-    server_socket.emit('username', { 'new_username': new_username}, request.sid)
-    print(new_username)
-
     print('Someone connected!')
-    server_socket.emit('new_user', {
-        'num_users': num_users
-    })
+    server_socket.emit('new_user', { 'num_users': num_users })
+
 
     
 
@@ -90,9 +89,7 @@ def on_disconnect():
     global num_users
     num_users -= 1
     print('Someone disconnected!')
-    server_socket.emit('lost_user', {
-        'num_users': num_users
-    })
+    server_socket.emit('lost_user', { 'num_users': num_users })
 
 
 @server_socket.on('message')
