@@ -56,8 +56,8 @@ export default function Layout() {
     
 
     useEffect(() => {
-    client_socket.on('message', msg => {
-      set_initial_message([...initial_message, msg]);
+    client_socket.on('message', (data) => {
+      set_initial_message([...initial_message, (data['new_username'], data['message']) ] );
       console.log("in message");
         });
     });
@@ -83,7 +83,7 @@ export default function Layout() {
     };
 
     const click_handler = () => {
-        client_socket.emit("message", new_message);
+        client_socket.emit("message", {new_username, new_message});
         set_message("");
     };
 
@@ -102,8 +102,7 @@ export default function Layout() {
 
                     <div className={useStyles().chat_window}>
                     <ScrollToBottom className="useStyles().chat_window">
-                    
-                        { initial_message.map(msg => (<div className="p_self">{msg}</div>)) }
+                        { initial_message.map((data) => (<div><div className="p_self">{data['new_message']}</div>{data['new_username']}</div>)) }
                     </ScrollToBottom>
                     </div>
                     

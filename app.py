@@ -97,9 +97,14 @@ def on_disconnect():
 
 @server_socket.on('message')
 def message_handler(message):
-    print("Received message: " + message)
-    server_socket.send(message)
-    bot(message)
+    global new_username
+    #print("Received message: " + message)
+    #server_socket.send(message)
+    #bot(message)
+    server_socket.emit('message', {
+        'message': message,
+        'new_username': new_username
+    })
     
 
 if __name__ == '__main__': 
