@@ -58,6 +58,12 @@ export default function Layout() {
         });
     });
     
+    useEffect(() => {
+    client_socket.on("lost_user", (data) => {
+      set_user_count(data['num_users']);
+        });
+    });
+    
     client_socket.removeAllListeners();
 
     const change_handler = (event) => {
