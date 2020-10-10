@@ -7,6 +7,7 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import * as SocketIO from 'socket.io-client';
 import './Styles.css';
+import ScrollToBottom from 'react-scroll-to-bottom';
 
 export var client_socket = SocketIO.connect();
 
@@ -27,6 +28,8 @@ const useStyles = makeStyles(layout => ({
         textAlign: 'right',
         padding: '3px',
         overflowY: 'auto',
+        overflowX: 'hidden',
+        flex: 'row-reverse'
     },
     chat_box: {
         width: '90%'  
@@ -55,12 +58,6 @@ export default function Layout() {
         });
     });
     
-    useEffect(() => {
-    client_socket.on("lost_user", (data) => {
-      set_user_count(data['num_users']);
-        });
-    });
-    
     client_socket.removeAllListeners();
 
     const change_handler = (event) => {
@@ -72,7 +69,6 @@ export default function Layout() {
         set_message("");
     };
 
-    
     return (
         <div>
             <div align = "center">
@@ -82,11 +78,13 @@ export default function Layout() {
                     <Typography component="h3">Number of users: {num_users}</Typography>
         
 
-
+                    
                     <div className={useStyles().chat_window}>
+                    <ScrollToBottom className="useStyles().chat_window">
                         { initial_message.map(msg => (<div className="p_self">{msg}</div>)) }
+                        </ScrollToBottom>
                     </div>
-
+                    
                     <div className={useStyles().flex}>
                         <TextField
                           id="standard-multiline-flexible"

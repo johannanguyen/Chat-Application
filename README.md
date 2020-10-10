@@ -6,6 +6,7 @@ Required dependencies:
   e) `npm install --save-dev webpack`  
   f) `npm install socket.io-client --save`  
   g) `npm install @material-ui/core`
+
   
 To start application: <br>
   a) `npm run watch` <br>
