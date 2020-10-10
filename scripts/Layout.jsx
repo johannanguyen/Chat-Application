@@ -59,7 +59,7 @@ export default function Layout() {
     useEffect(() => {
     client_socket.on('message', (data) => {
       set_initial_message([...initial_message, (data['new_username'], data['message']) ] );
-      console.log("in message");
+      console.log("Received a message: ", data['new_username'], data['message']);
         });
     });
     
