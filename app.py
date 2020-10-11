@@ -21,7 +21,7 @@ def bot(message):
         server_socket.emit('message', { 'new_username': new_username, "message": message } )
             
     elif (message["new_message"] == "!!pokemon"):
-        poke_num = random.randint(1, 151)
+        poke_num = random.randint(1, 300)
         api_link = f"https://pokeapi.co/api/v2/pokemon/{poke_num}"
         poke_data = requests.get(api_link)
         pack_data = poke_data.json()
@@ -42,7 +42,9 @@ def bot(message):
                 "I'm feeling evil.",
                 "I'm feeling bored.",
                 "I'm feeling lazy....."]
-        server_socket.send(random.choice(moods))
+        message['new_username'] = "Poke-bot"
+        message['new_message'] = random.choice(moods)
+        server_socket.emit('message', { 'new_username': new_username, "message": message } )
             
     elif (message["new_message"] == "!!help"):
         message['new_username'] = "Poke-bot"
