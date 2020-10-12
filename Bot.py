@@ -7,7 +7,6 @@ class Bot:
 
     def bot_action(self):
         input_data = self.input_data
-        #input_data["new_username"] = "DEXTER"
         
         if (input_data["new_message"] == "!!about"):
             print("Function entered !!about")
