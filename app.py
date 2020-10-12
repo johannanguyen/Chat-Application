@@ -8,6 +8,7 @@ import flask_sqlalchemy
 import models
 from os.path import join, dirname
 from dotenv import load_dotenv
+import Bot
 
 
 #DB STUFF
@@ -40,6 +41,7 @@ db.session.commit()
 
 
 #BOT STUFF
+"""
 def bot(message):
     if (message["new_message"] == "!!about"):
         print("Function entered !!about")
@@ -80,13 +82,13 @@ def bot(message):
             
     elif (message["new_message"].split()[0] == "!!funtranslate"):
         phrase= message["new_message"][15:]
-        """
-        api_link = f"https://api.funtranslations.com/translate/doge.json?text={phrase}"
-        doge_data = requests.get(api_link)
-        pack_data = doge_data.json()
-        translated = pack_data['contents']['translated']
-        message['new_message'] = translated
-        """
+
+        #api_link = f"https://api.funtranslations.com/translate/doge.json?text={phrase}"
+        #doge_data = requests.get(api_link)
+        #pack_data = doge_data.json()
+        #translated = pack_data['contents']['translated']
+        #message['new_message'] = translated
+
         message['new_username'] = "Poke-bot"
         message['new_message'] = "Placeholder"
         
@@ -97,7 +99,7 @@ def bot(message):
         message['new_message'] = "Sorry, that is not a valid command. :/"
         
         server_socket.emit('message', { 'new_username': new_username, "message": message } )
-        
+"""        
 
 @server_socket.on('connect')
 def on_connect():
@@ -143,8 +145,13 @@ def on_disconnect():
 def message_handler(message):
     global new_username
     server_socket.emit('message', { 'message': message, 'new_username': new_username })
+    
+    poke_bot = Bot.Bot(message)
     if message["new_message"][0:2] == "!!":
-        bot(message)
+        message['new_username'] = "Poke-bot"
+        message['new_message'] = poke_bot.bot_action()
+        server_socket.emit('message', { 'new_username': new_username, "message": message } )
+
         
     
     db.session.add(models.SavedMessages(message["new_message"], message["new_username"]))
