@@ -91,7 +91,6 @@ export default function Layout() {
     
 
 
-
     const change_handler = (event) => {
         set_message(event.target.value);
     };

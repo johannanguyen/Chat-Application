@@ -81,10 +81,10 @@ def message_handler(message):
     global new_username
     server_socket.emit('message', { 'message': message, 'new_username': new_username })
     
-    poke_bot = Bot.Bot(message)
+    dexter = Bot.Bot(message)
     if message["new_message"][0:2] == "!!":
         message['new_username'] = "DEXTER"
-        message['new_message'] = poke_bot.bot_action()
+        message['new_message'] = dexter.bot_action()
         server_socket.emit('message', { 'new_username': new_username, "message": message } )
 
     db.session.add(models.SavedMessages(message["new_message"], message["new_username"]))
