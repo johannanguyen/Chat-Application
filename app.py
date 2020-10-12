@@ -12,7 +12,7 @@ import Bot
 
 
 #DB STUFF
-MESSAGE_RECEIVED_CHANNEL = 'message_history'
+MESSAGES_RECEIVED_CHANNEL = 'message_history'
 
 app = flask.Flask(__name__)
 server_socket = flask_socketio.SocketIO(app)
@@ -39,6 +39,18 @@ db.create_all()
 db.session.commit()
 
 
+def emit_all_messages(channel, sid):
+    all_messages = [ \
+        DB_message.db_message for DB_message \
+        in db.session.query(models.SavedMessages).all()]
+    
+    all_users = [ \
+        DB_username.db_username for DB_username \
+        in db.session.query(models.SavedMessages).all()]
+        
+    server_socket.emit("message_history", { 'allMessages': all_messages, 'allUsers': all_users }, sid)
+    
+
 @server_socket.on('connect')
 def on_connect():
     poke_num = random.randint(1, 151)
@@ -57,15 +69,8 @@ def on_connect():
     server_socket.emit('new_user', { 'num_users': num_users }, broadcast=True)
     print('Someone connected!', num_users)
     
-    all_messages = [ \
-        DB_message.db_message for DB_message \
-        in db.session.query(models.SavedMessages).all()]
-    
-    all_users = [ \
-        DB_username.db_username for DB_username \
-        in db.session.query(models.SavedMessages).all()]
-        
-    server_socket.emit("message_history", { 'allMessages': all_messages, 'allUsers': all_users }, request.sid)
+    global MESSAGES_RECEIVED_CHANNEL
+    emit_all_messages(MESSAGES_RECEIVED_CHANNEL, request.sid)
 
 
 @server_socket.on('disconnect')
