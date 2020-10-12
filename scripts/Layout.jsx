@@ -46,6 +46,8 @@ export default function Layout() {
     const [num_users, set_user_count] = useState(0);
     const [initial_message, set_initial_message] = useState([]);
     const [new_message, set_message] = useState("");
+    const [db_message, set_db_message] = useState([]);
+    const [db_user, set_db_user] = useState([]);
     
     useEffect(() => {
     client_socket.on("username", (data) => {
@@ -63,6 +65,16 @@ export default function Layout() {
         });
     });
     
+    
+    useEffect(() => {
+    client_socket.on('message_history', (data) => {
+      set_db_message(data["allMessages"], []);
+      set_db_user(data["allUsers"], []);
+      console.log("Received something: ", data["allMessages"], data["allUsers"]);
+        });
+    });
+
+    
     useEffect(() => {
     client_socket.on("new_user", (data) => {
       set_user_count(data['num_users']);
@@ -77,7 +89,8 @@ export default function Layout() {
         });
     });
     
-    client_socket.removeAllListeners();
+
+
 
     const change_handler = (event) => {
         set_message(event.target.value);
@@ -87,6 +100,8 @@ export default function Layout() {
         client_socket.emit("message", {new_username, new_message});
         set_message("");
     };
+
+    
 
     return (
         <div>
@@ -103,7 +118,10 @@ export default function Layout() {
 
                     <div className={useStyles().chat_window}>
                     <ScrollToBottom className="useStyles().chat_window">
+                    
+                        { db_message.map((data, index) => (<div><div className="p_self">{data}</div>{db_user[index]}</div>)) }
                         { initial_message.map((data) => (<div><div className="p_self">{data['new_message']}</div>{data['new_username']}</div>)) }
+                        
                     </ScrollToBottom>
                     </div>
                     
