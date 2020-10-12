@@ -10,7 +10,7 @@ class Bot:
         
         if (input_data["new_message"] == "!!about"):
             print("Function entered !!about")
-            input_data['new_message'] = "This is the best chat ever"
+            input_data['new_message'] = "Hey! I'm Dexter, here to help you along your journey to become a Pokemon master!"
             print("TEST: ", input_data)
             return input_data['new_message']
                 
