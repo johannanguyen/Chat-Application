@@ -1,5 +1,5 @@
 1. Clone this repo and install the required dependencies using the following commands:<br>
-  a) git clone https://github.com/johannanguyen/project2-m1-jn354.git<br>
+  a) `git clone https://github.com/johannanguyen/project2-m1-jn354.git`<br>
   b) `npm install`  
   c) `pip install flask-socketio`  
   d) `pip install eventlet`  
