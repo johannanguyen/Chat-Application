@@ -58,7 +58,7 @@ def on_connect():
     global new_username 
     new_username = pack_data['species']['name']
     global num_users
-    num_users += 1
+    num_users += .5
     
     server_socket.emit('username', { 'new_username': new_username, 'num_users': num_users }, request.sid)
     print("Given username: ", new_username)
@@ -73,7 +73,7 @@ def on_connect():
 @server_socket.on('disconnect')
 def on_disconnect():
     global num_users
-    num_users -= 1
+    num_users -= .5
     print('Someone disconnected!')
     server_socket.emit('lost_user', { 'num_users': num_users })
 
