@@ -50,6 +50,10 @@ def emit_all_messages(channel, sid):
 
 @server_socket.on('connect')
 def on_connect():
+
+    global num_users
+    num_users += .5
+    
     poke_num = random.randint(1, 151)
     api_link = f"https://pokeapi.co/api/v2/pokemon/{poke_num}"
     poke_data = requests.get(api_link)
@@ -57,8 +61,6 @@ def on_connect():
     
     global new_username 
     new_username = pack_data['species']['name']
-    global num_users
-    num_users += .5
     
     server_socket.emit('username', { 'new_username': new_username, 'num_users': num_users }, request.sid)
     print("Given username: ", new_username)
