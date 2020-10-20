@@ -13,12 +13,15 @@ const responseGoogle = (response) => {
 function get_info(response) {
     let username = response.nt.Ad
     let picture = response.profileObj.imageUrl
+    let token_id = response.tokenId
+    
     console.log("Name is ", username)
     console.log("Picture url is ", picture)
+    console.log("Token id is ", token_id)
     
     client_socket.emit("new google user", {
         "username": username,
-        "picture": picture
+        "picture": picture,
     })
 }
 
