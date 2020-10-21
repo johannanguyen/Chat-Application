@@ -47,6 +47,8 @@ def emit_all_messages(channel, sid):
         
     server_socket.emit("message_history", { 'allMessages': all_messages, 'allUsers': all_users }, sid)
     
+    global MESSAGES_RECEIVED_CHANNEL
+    emit_all_messages(MESSAGES_RECEIVED_CHANNEL, request.sid)
 
 @server_socket.on('connect')
 def on_connect():
