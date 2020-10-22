@@ -58,9 +58,7 @@ by using the following commands:<br>
        May need to do a hard refresh by typing `ctrl + shift + r`<br>
      
 <b>KNOWN ISSUES</b>
-1. The code is piled up on top of each other and needs to be refactored. Although this does not hinder its performance, it dampens the code's organization and readability.<br>
-2. As the number of messages increase, the time it takes to send greatly increases. I would like to combat this by implementing a "slow" chat-mode, forcing people to only send messages once every ~ 2 seconds.<br>
-3. Usernames are assigned by randomly selecting one out of 300 names. In this case, there is a possibility that two users may have the same username at the same time.
+1. The app is not mobile-friendly. Although the functionality remains in tact, the formatting needs some work. The chat box does not resize based on browser size and the background repeats when it is not intended to.
 
 <b>TECHNICAL DIFFICULTIES</b>
 1. Replacing the randomly assigned Pokémon name to the user’s actual google login name: This was an issue because initially, I was randomly selecting Pokémon names by pulling information from an API in the backend portion of my project. Realizing that I now had to grab the name information from the client, send it to the server, then back to the client, was more troublesome than I had initially anticipated.
