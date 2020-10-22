@@ -5,10 +5,9 @@
   d) `pip install eventlet`  
   e) `npm install -g webpack`  
   f) `npm install --save-dev webpack`  
-  g) `npm install socket.io-client --save`  
-  h) `npm install @material-ui/core`<br>
+  g) `npm install socket.io-client --save`<br>
   If any messages occur, rerun the failed commands but add "sudo " to the beginning of them<br>
-      ie. `npm install @material-ui/core` -> `sudo npm install @material-ui/core`
+      ie. `pip install eventlet` -> `pip install eventlet`
       
 2. Get PSQL to work updating yum and pip and installing psycopg2 and SQLAlchemy
 by using the following commands:<br>
