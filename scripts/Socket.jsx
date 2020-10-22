@@ -1,3 +1,3 @@
 import * as SocketIO from 'socket.io-client';
 
-export var Socket = SocketIO.connect();
+export var client_socket = SocketIO.connect();

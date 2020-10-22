@@ -26,20 +26,22 @@ class Bot:
             input_data['new_message'] = poke_name + " is a " + poke_type + " pokemon! :)"
             return input_data['new_message']
                 
-        elif (input_data["new_message"] == "!!mood"):
-            moods = [ "I'm feeling happy.",
-                    "I'm feeling sleepy.",
-                    "I'm feeling awkward.",
-                    "I'm feeling lovely.",
-                    "I'm feeling hungry.",
-                    "I'm feeling evil.",
-                    "I'm feeling bored.",
-                    "I'm feeling lazy....."]
-            input_data['new_message'] = random.choice(moods)
+        elif (input_data["new_message"] == "!!quote"):
+            quotes = [ "Hey, I know. I’ll use my trusty frying pan as a drying pan. -Brock",
+                    "Err...my name is...Tom Ato! -Ash",
+                    "I see now that one’s birth is irrelevant. It’s what you do that determines who you are. -Mewtwo",
+                    "A Caterpie may change into a Butterfree, but the heart that beats inside remains the same. -Brock",
+                    "There’s no sense in going out of your way to get somebody to like you. -Ash",
+                    "It's following Pikachu around like its a streaker or something. -Ash",
+                    "A wildfire destroys everything in its path. It will be the same with your powers unless you learn to control them. -Giovanni",
+                    "Take charge of your destiny. -Rayquaza",
+                    "I’m totally unprepared to deal with life’s realities. -Meowth"]
+                    
+            input_data['new_message'] = random.choice(quotes)
             return input_data['new_message']
                 
         elif (input_data["new_message"] == "!!help"):
-            input_data['new_message'] = "Select from one of these: !!about -  !!funtranslate [message] - !!mood -  !!pokemon - !!help"
+            input_data['new_message'] = "Select from one of these: !!about !!funtranslate [message] !!quote !!pokemon !!help"
             return input_data['new_message']
                 
         elif (input_data["new_message"].split()[0] == "!!funtranslate"):

@@ -1,30 +1,36 @@
+import { client_socket } from './Socket';
+import GoogleLogin from 'react-google-login';
 import * as React from 'react';
-import { Socket } from './Socket';
-import ReactDOM from 'react-dom';
-import { GoogleLogin } from 'react-google-login';
+
 
 const responseGoogle = (response) => {
-  console.log(response);
+  console.log("Could not log in: ", response);
 }
 
-function get_info(response) {
-    let username = response.nt.Ad
-    let picture = response.profileObj.imageUrl
-    console.log("Name is ", username)
-    console.log("Picture url is ", picture)
+function get_info(google_user) {
+    var id_token = google_user.getAuthResponse().id_token;
+    let username = google_user.profileObj.name;
+    let image = google_user.profileObj.imageUrl;
+    let is_signed_in = google_user.isSignedIn()
     
-    Socket.emit("new google user", {
-        "username": username,
-        "picture": picture
-    })
+    client_socket.emit('google_user', {
+        'id_token': id_token,
+        'username': username,
+        'image': image,
+        'is_signed_in': is_signed_in
+    });
 }
 
 export function GoogleButton() {
-    return <GoogleLogin
-        clientId="926047747876-uprudtkm1e9d6e23nrf252dq07qb62tn.apps.googleusercontent.com"
-        buttonText="Login"
-        onSuccess={get_info}
-        onFailure={responseGoogle}
-        cookiePolicy={'single_host_origin'}
-        />;
+    return (
+        <div>
+            <GoogleLogin
+            clientId="926047747876-uprudtkm1e9d6e23nrf252dq07qb62tn.apps.googleusercontent.com"
+            buttonText="Login to Talk to the Coolest People EVER"
+            onSuccess={get_info}
+            onFailure={responseGoogle}
+            cookiePolicy={'single_host_origin'}
+            />
+        </div>
+    );
 }
