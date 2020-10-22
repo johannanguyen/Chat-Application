@@ -27,7 +27,7 @@ num_users = 0
 dotenv_path = join(dirname(__file__), 'sql.env')
 load_dotenv(dotenv_path)
 
-database_uri = os.environ['DATABASE_URL']
+database_uri = os.environ['DATABASE_URI']
     
 app.config['SQLALCHEMY_DATABASE_URI'] = database_uri
 
