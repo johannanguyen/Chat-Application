@@ -63,4 +63,7 @@ by using the following commands:<br>
 3. Usernames are assigned by randomly selecting one out of 300 names. In this case, there is a possibility that two users may have the same username at the same time.
 
 <b>TECHNICAL DIFFICULTIES</b>
+1. Replacing the randomly assigned Pokémon name to the user’s actual google login name: This was an issue because initially, I was randomly selecting Pokémon names by pulling information from an API in the backend portion of my project. Realizing that I now had to grab the name information from the client, send it to the server, then back to the client, was more troublesome than I had initially anticipated.
+2. Forcing the login page to display before the chatbox: This was difficult to accomplish because I knew that using a hidden <div> would work as expected; however, I using using Paper from material-ui which did not integrate HTML well. After struggling with the login process for some time, I decided to replace my Paper styling completely. Making the switch made styling and hiding the chatbox much simpler. 
+
 
