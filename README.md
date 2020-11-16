@@ -1,3 +1,5 @@
+https://pokemon-chitchat.herokuapp.com/
+
 1. Clone this repo and install the required dependencies using the following commands:<br>
   a) `git clone https://github.com/johannanguyen/project2-m1-jn354.git`<br>
   b) `npm install`  
@@ -64,7 +66,7 @@ by using the following commands:<br>
 1. Replacing the randomly assigned Pokémon name to the user’s actual google login name: This was an issue because initially, I was randomly selecting Pokémon names by pulling information from an API in the backend portion of my project. Realizing that I now had to grab the name information from the client, send it to the server, then back to the client, was more troublesome than I had initially anticipated.
 2. Forcing the login page to display before the chatbox: This was difficult to accomplish because I knew that using a hidden `<div>` would work as expected; however, I using using `Paper` from `material-ui` which did not integrate HTML well. After struggling with the login process for some time, I decided to replace my `Paper` styling completely. Making the switch made styling and hiding the chatbox much simpler. 
 
-https://pokemon-chitchat.herokuapp.com/
+
 
 <img src="https://i.ibb.co/zbGC3vB/p2m2-1.png">
 <img src="https://i.ibb.co/SJkvWZ5/p2m2.png">
